@@ -35,7 +35,33 @@ HAVING COUNT(*) >= 2
 ORDER BY casos_positivos DESC;
 
 -- Ejercicio 2
+--Cuenta cuántos casos hay en total por cada especie (bovino / caprino)
+ SELECT  especie,
+       COUNT(*) AS total_casos   
+FROM casos_brucelosis
+GROUP BY especie;
+
 -- Ejercicio 3
+--Para cada departamento, muestra cuántos casos negativos hubo
+SELECT  departamento,
+       COUNT(*) AS casos_negativos
+FROM casos_brucelosis
+WHERE resultado = 'negativo'
+GROUP BY departamento;
+
 -- Ejercicio 4
+--Muestra la edad mínima, máxima y promedio (redondeada a 1 decimal) de todos los animales con resultado positivo
+SELECT   MAX(edad_meses) AS edad_maxima,
+                    MIN (edad_meses) AS edad_minima,
+       ROUND(AVG(edad_meses)::numeric, 1) AS edad_promedio_meses       
+FROM casos_brucelosis
+WHERE resultado = 'positivo';
+
 -- Ejercicio 5
--- Ejercicio 6
+Para cada departamento, muestra el número total de casos y la fecha del primer caso reportado, pero solo los departamentos que tengan 4 o más casos registrados
+SELECT departamento,
+       COUNT(*) AS total_casos,
+       MIN(fecha_reporte) AS primer_caso
+FROM casos_brucelosis
+GROUP BY departamento
+HAVING COUNT(*) >= 4;
