@@ -55,5 +55,5 @@ WHERE (departamento = 'Antioquia' OR departamento = 'Córdoba')
 --Casos reportados después del 1 de febrero de 2026, ordenados del más antiguo al más reciente
 SELECT *
 FROM casos_brucelosis
-WHERE fecha_reporte < '2026-01-20'
+WHERE fecha_reporte > '2026-02-01'
 ORDER BY fecha_reporte ASC;
